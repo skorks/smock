@@ -1,0 +1,22 @@
+- should be able to create a stub object by providing a hash of method name to return value pairs, the method to create the stub object should be callable from anywhere maybe without polluting the global objects
+- when testing a method on a class if it calls another method should be able to intercept that method call and specify what should be returned 
+- when testing a method not in a class or module if it calls another global method should be able to intercept and specify what should be returned
+- should be able to easily slot into another project such as attest without too much work needing to be done
+- the syntax we're interested in right now:
+  calling(:total).on(@object).returns(20)
+  calling(:total).on(@object).with(1,2).returns(30)
+  calling(:total).on(@object).with([[1,2],[3,4]]).returns(30, 40) # multiple calls with different params return different values
+  calling(:blah).returns(5) #global method not in class or module
+
+
+
+- syntax should be intuitive:
+  obj=stub(:blah => true, :yadda => 10)
+
+  when_calling(:total_weight).on(@object).returns(10)
+  when_calling(:total).from(@object, :method).returns(20)
+  when_calling(:new).on(SomeObj).with(x, y).returns(stub)
+
+  expecting(:new).on(SomeObje).with(x).returns(y)
+  expecting(:parse).on(y).returns(container)
+
